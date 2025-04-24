@@ -119,6 +119,10 @@ if st.button("Predict Salary"):
                 input_df[col] = 0
         input_df = input_df[feature_cols]
 
+st.write("Input DataFrame:")
+st.write(input_df)
+st.write("Shape:", input_df.shape)
+        
         salary = model.predict(input_df)[0]
         st.success(f"💰 Estimated Salary: ${int(salary):,}")
     except Exception as e:
