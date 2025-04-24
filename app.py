@@ -89,25 +89,30 @@ education_order = {
 education_level = education_order[education_input]
 
 # -------------- DataFrame Construction ----------------
-input_dict = {
-    'experience_years': experience,
-    'ml_experience_years': ml_experience,
-    'cloud_spend': cloud_spend,
-    'education_level': education_level,
-    'ml_maturity': ml_maturity
-}
+# Start with all zeros
+input_dict = {col: 0 for col in feature_cols}
 
-# Dummy column encoding
-for col in feature_cols:
-    if col.startswith("role_"):
-        input_dict[col] = 1 if f"role_{role}" == col else 0
-    elif col.startswith("country_"):
-        input_dict[col] = 1 if f"country_{country}" == col else 0
-    elif col.startswith("industry_"):
-        input_dict[col] = 1 if f"industry_{industry}" == col else 0
-    elif col.startswith(("Q124", "Q157", "Q179")):
-        input_dict[col] = 0  # Assume no tool selected (can extend later)
+# Fill in known values
+input_dict['experience_years'] = experience
+input_dict['ml_experience_years'] = ml_experience
+input_dict['cloud_spend'] = cloud_spend
+input_dict['education_level'] = education_level
+input_dict['ml_maturity'] = ml_maturity
 
+# Set one-hot columns
+role_col = f'role_{role}'
+if role_col in input_dict:
+    input_dict[role_col] = 1
+
+country_col = f'country_{country}'
+if country_col in input_dict:
+    input_dict[country_col] = 1
+
+industry_col = f'industry_{industry}'
+if industry_col in input_dict:
+    input_dict[industry_col] = 1
+
+# Create DataFrame
 input_df = pd.DataFrame([input_dict])
 
 # -------------- Prediction ----------------
