@@ -106,13 +106,19 @@ for col in feature_cols:
     elif col.startswith("industry_"):
         input_dict[col] = 1 if f"industry_{industry}" == col else 0
     elif col.startswith(("Q124", "Q157", "Q179")):
-        input_dict[col] = 0  # default to 0 unless tools are later included via multiselect
+        input_dict[col] = 0  # Assume no tool selected (can extend later)
 
 input_df = pd.DataFrame([input_dict])
 
 # -------------- Prediction ----------------
 if st.button("Predict Salary"):
     try:
+        # 🛠 Ensure all expected columns are present
+        for col in feature_cols:
+            if col not in input_df.columns:
+                input_df[col] = 0
+        input_df = input_df[feature_cols]
+
         salary = model.predict(input_df)[0]
         st.success(f"💰 Estimated Salary: ${int(salary):,}")
     except Exception as e:
