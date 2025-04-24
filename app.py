@@ -38,19 +38,19 @@ cloud_spend = spend_map[cloud_spend_input]
 # Country
 country = st.selectbox("Country You Reside In", [
     'United States of America', 'India', 'France', 'Germany', 'United Kingdom', 'Canada', 'Other'
-])
+]).strip()
 
 # Role
 role = st.selectbox("Current Role", [
     'Data Scientist', 'Data Analyst', 'ML Engineer', 'Research Scientist',
     'Software Engineer', 'Statistician', 'Other'
-])
+]).strip()
 
 # Industry
 industry = st.selectbox("Industry of Current Employer", [
     'Online Service/Internet-based Services', 'Academics/Education', 'Finance',
     'Medical/Pharmaceutical', 'Government/Public Service', 'Other'
-])
+]).strip()
 
 # ML Maturity
 ml_maturity_input = st.selectbox("Does Your Employer Use ML Methods?", [
