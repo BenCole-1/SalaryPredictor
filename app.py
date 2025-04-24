@@ -113,16 +113,16 @@ input_df = pd.DataFrame([input_dict])
 # -------------- Prediction ----------------
 if st.button("Predict Salary"):
     try:
-        # 🛠 Ensure all expected columns are present
         for col in feature_cols:
             if col not in input_df.columns:
                 input_df[col] = 0
         input_df = input_df[feature_cols]
 
-st.write("Input DataFrame:")
-st.write(input_df)
-st.write("Shape:", input_df.shape)
-        
+        # ✅ Debug output to help you see the problem
+        st.write("Input DataFrame:")
+        st.write(input_df)
+        st.write("Shape:", input_df.shape)
+
         salary = model.predict(input_df)[0]
         st.success(f"💰 Estimated Salary: ${int(salary):,}")
     except Exception as e:
