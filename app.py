@@ -14,7 +14,7 @@ def load_model():
 
 model, feature_cols = load_model()
 
-st.title("💼 Data Scientist Salary Predictor")
+st.title("💼 Data Scientist Salary Predictorrr")
 st.markdown("Enter your details below to receive a salary prediction:")
 
 # ----------- User Inputs -----------
